@@ -168,6 +168,8 @@ for url in linkext[0:-1]:
             data_dict["major locations"] = "fbfaabca-0e9e-4db4-be1c-6cc8e8b8f63d"
         elif pattern == "Chon Buri":
             data_dict["major locations"] = "ce1da47b-78b6-4351-b849-e337db181c6a"
+        elif pattern == "None":
+            data_dict["major locations"] = "None"            
         else:
             data_dict["major locations"] = ("No Match Found")
 
