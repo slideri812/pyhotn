@@ -114,18 +114,34 @@ for url in linkext[0:-1]:
             data_dict["title"] = ("Apartment")
 
         #subtitle
-        data_dict["subtitle"] = detail.title.text.strip()
+#         data_dict["subtitle"] = detail.title.text.strip()
+
+        try:
+            data_dict["subtitle"] = detail.title.text.strip()
+        except:
+            data_dict["subtitle"] = None
 
         #location
-        try:
-            data_dict["location"] = detail.find("a",{"id":"myDataList_lblLocation_1"}).text.strip()[10:]
-        except AttributeError as e:
-            data_dict["location"] = None
+#         try: #this is pulling info form the cards at the bottom pf the page which is now incorrect 
+#             data_dict["location"] = detail.find("a",{"id":"myDataList_lblLocation_1"}).text.strip()[10:]
+#         except AttributeError as e:
+#             data_dict["location"] = None
 
-        try:
-            data_dict["location2"] = detail.find("span",{"id":"lblAddress"}).text.strip()
-        except AttributeError as e:
-            data_dict["location"] = None
+#         try: #this was the orginal location 2
+#             data_dict["location2"] = detail.find("span",{"id":"lblAddress"}).text.strip()
+#         except AttributeError as e:
+#             data_dict["location2"] = None
+
+        try: #this is the update - fixes some problems but loops 110 times when it encounters an error
+            data_dict["location"] = detail.find("span",{"id":"lblAddress"}).text.strip()
+        except Exception as e1:
+            print("location Exception 1")            
+            print(e1)
+            data_dict["location"] = ("location error 1")
+        except Exception as e2:
+            print("location Exception 2")
+            print(e2)
+            data_dict["location"] = ("location error 2")
 
         #rates
         try:
@@ -168,8 +184,6 @@ for url in linkext[0:-1]:
             data_dict["major locations"] = "fbfaabca-0e9e-4db4-be1c-6cc8e8b8f63d"
         elif pattern == "Chon Buri":
             data_dict["major locations"] = "ce1da47b-78b6-4351-b849-e337db181c6a"
-        elif pattern == "None":
-            data_dict["major locations"] = "None"            
         else:
             data_dict["major locations"] = ("No Match Found")
 
