@@ -122,7 +122,7 @@ for url in linkext[0:-1]:
             data_dict["subtitle"] = None
 
         #location
-#         try: #this is pulling info form the cards at the bottom pf the page which is now incorrect 
+#         try: #this is wrongfully pulling info from the cards at the bottom of the page - Site had code change 
 #             data_dict["location"] = detail.find("a",{"id":"myDataList_lblLocation_1"}).text.strip()[10:]
 #         except AttributeError as e:
 #             data_dict["location"] = None
@@ -132,7 +132,8 @@ for url in linkext[0:-1]:
 #         except AttributeError as e:
 #             data_dict["location2"] = None
 
-        try: #this is the update - fixes some problems but loops 110 times when it encounters an error
+        #this is the update - fixes some problems but loops 110 times when it encounters an error
+        try:
             data_dict["location"] = detail.find("span",{"id":"lblAddress"}).text.strip()
         except Exception as e1:
             print("location Exception 1")            
